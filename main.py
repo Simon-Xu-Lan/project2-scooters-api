@@ -9,11 +9,13 @@ from scooters import get_scooter_data
 from mongo_to_sql import clean_data_to_sql
 from retrieve_data import get_all, get_by_name, get_latest
 
-from sqlalchemy import create_engine
-from config import POSTGRES_HEROKU_PASSWORD_2
+# from sqlalchemy import create_engine
+# from config import POSTGRES_HEROKU_PASSWORD_2
+
+
 # Create PostgreSQL engine
-postgres_heroku_path_2 = f"postgresql://acurubwqqcguqg:{POSTGRES_HEROKU_PASSWORD_2}@ec2-107-20-153-39.compute-1.amazonaws.com:5432/dd87jp2gm4bgdr"
-engine = create_engine(postgres_heroku_path_2)
+# postgres_heroku_path_2 = f"postgresql://acurubwqqcguqg:{POSTGRES_HEROKU_PASSWORD_2}@ec2-107-20-153-39.compute-1.amazonaws.com:5432/dd87jp2gm4bgdr"
+# engine = create_engine(postgres_heroku_path_2)
 
 
 
