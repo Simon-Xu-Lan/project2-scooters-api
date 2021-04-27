@@ -8,9 +8,9 @@ import time
 from Resources.companies import compInfo
 from geo_polygons import Polygons
 import os
-# from config import ATLAS_PASSWORD
+from config import ATLAS_PASSWORD
 
-ATLAS_PASSWORD=os.environ.get('ATLAS_PASSWORD')
+# ATLAS_PASSWORD=os.environ.get('ATLAS_PASSWORD')
 
 # MONGODB
 # Initialize PyMongo to work with MongoDBs

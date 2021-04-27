@@ -3,14 +3,14 @@ import pymongo
 import time
 from sqlalchemy import create_engine
 import os
-# from config import POSTGRES_PASSWORD, POSTGRES_HEROKU_PASSWORD_1, POSTGRES_HEROKU_PASSWORD_2, ATLAS_PASSWORD
+from config import POSTGRES_PASSWORD, POSTGRES_HEROKU_PASSWORD_1, POSTGRES_HEROKU_PASSWORD_2, ATLAS_PASSWORD
 
-POSTGRES_HEROKU_PASSWORD_2=os.environ.get('POSTGRES_HEROKU_PASSWORD_2')
-ATLAS_PASSWORD=os.environ.get('ATLAS_PASSWORD')
+# POSTGRES_HEROKU_PASSWORD_2=os.environ.get('POSTGRES_HEROKU_PASSWORD_2')
+# ATLAS_PASSWORD=os.environ.get('ATLAS_PASSWORD')
 
 # Create PostgreSQL engine
-# postgres_local_path = f'postgres://postgres:{POSTGRES_PASSWORD}@localhost:5432/Scooters_DB'
-# postgres_heroku_path_1 = f'postgresql://bsapfqjhpjbnae:{POSTGRES_HEROKU_PASSWORD_1}@ec2-34-233-0-64.compute-1.amazonaws.com:5432/d8oqd54nu7g7qr'
+postgres_local_path = f'postgres://postgres:{POSTGRES_PASSWORD}@localhost:5432/Scooters_DB'
+postgres_heroku_path_1 = f'postgresql://bsapfqjhpjbnae:{POSTGRES_HEROKU_PASSWORD_1}@ec2-34-233-0-64.compute-1.amazonaws.com:5432/d8oqd54nu7g7qr'
 postgres_heroku_path_2 = f"postgresql://acurubwqqcguqg:{POSTGRES_HEROKU_PASSWORD_2}@ec2-107-20-153-39.compute-1.amazonaws.com:5432/dd87jp2gm4bgdr"
 engine = create_engine(postgres_heroku_path_2)
 # MongoDB connection

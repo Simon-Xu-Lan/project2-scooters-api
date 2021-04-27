@@ -7,24 +7,15 @@ CREATE TABLE scooters (
 	bike_id TEXT,
 	lat NUMERIC(10,7),
 	lon NUMERIC(10,7),
-	is_reserved BOOLEAN,
-	is_disabled BOOLEAN
+	is_reserved INTEGER,
 );
 
--- CREATE TABLE weather_records (
--- 	id SERIAL PRIMARY KEY,
--- 	AIRTEMP VARCHAR(10),
--- 	RELATIVEHUMIDITY VARCHAR(10),
--- 	VISIBILITY VARCHAR(10),
--- 	WINDSPEED VARCHAR(10),
--- 	DATADATETIME BIGINT,
--- 	tractid BIGINT
--- );
 
--- CREATE TABLE process_log (
--- 	id SERIAL PRIMARY KEY,
--- 	last_saved BIGINT,
--- 	saved_records INTEGER
--- );
 
+DROP TABLE IF EXISTS clean_log;
+
+CREATE TABLE clean_log (
+	id SERIAL PRIMARY KEY,
+	clean_time BIGINT,
+)
 

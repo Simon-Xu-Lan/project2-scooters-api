@@ -1,52 +1,16 @@
-# Dependencies
-import time
-from flask import Flask, render_template, redirect, jsonify, request
+from flask import Flask, render_template, jsonify
 from flask_cors import CORS
-from flask_apscheduler import APScheduler
-from scooters import get_scooter_data
-# from apscheduler.schedulers.blocking import BlockingScheduler
 
-from mongo_to_sql import clean_data_to_sql
-from retrieve_data import get_all, get_by_name, get_latest
-
-# from sqlalchemy import create_engine
-# from config import POSTGRES_HEROKU_PASSWORD_2
-
-
-# Create PostgreSQL engine
-# postgres_heroku_path_2 = f"postgresql://acurubwqqcguqg:{POSTGRES_HEROKU_PASSWORD_2}@ec2-107-20-153-39.compute-1.amazonaws.com:5432/dd87jp2gm4bgdr"
-# engine = create_engine(postgres_heroku_path_2)
-
+from retrieve_data import get_all, get_by_name, get_latest, get_last_hours
+from retrieve_trips import get_all_trips, get_recent_trips_by_hours, get_trips_by_company, get_summary
 
 
 app = Flask(__name__)
-scheduler = APScheduler()
-
-# Set global variable count with initial value as 0
-total_runs = 0
-count_get_scooter_data = 0
-count_clean_data_to_sql = 0
-
-def job1():
-    global scheduler, total_runs, count_get_scooter_data, count_clean_data_to_sql
-    total_runs += 1
-    print(total_runs)
-    get_scooter_data()
-    count_get_scooter_data += 1
-    is_successful = True
-    if count_get_scooter_data == 60:
-        is_successful = clean_data_to_sql()
-        count_get_scooter_data = 0
-        count_clean_data_to_sql += 1
-    if not is_successful:
-        scheduler.remove_job("scooter_job")
-    print("job 1")
-
-
+CORS(app)
 
 @app.route("/")
 def home():
-    return render_template("index.html", count=total_runs)
+    return render_template("index.html")
 
 @app.route("/api/all", methods=["GET"])
 def get_all_records():
@@ -61,13 +25,25 @@ def get_by_company_name(name, limit):
 def get_latest_records():
     return jsonify(data=get_latest())
 
+@app.route("/api/recent_hours/<number>")
+def get_by_hours(number):
+    return jsonify(data=get_last_hours(number))
 
+@app.route("/api/trips/all")
+def get_trips():
+    return jsonify(data=get_all_trips())
+
+@app.route("/api/trips/recent_hours/<number>")
+def get_recent_trips(number):
+    return jsonify(data=get_recent_trips_by_hours(number))
+
+@app.route("/api/trips/company/<name>/<number>")
+def get_company_trips(name, number):
+    return jsonify(data=get_trips_by_company(name, number))
+
+@app.route("/api/trips/summary")
+def get_sums():
+    return jsonify(data=get_summary())
 
 if __name__ == '__main__':
-    scheduler.add_job(func=job1, trigger="interval", id="scooters_job", seconds=60)
-    scheduler.api_enabled = True
-    scheduler.init_app(app)
-    scheduler.start()
-    app.run()
-
-
+    app.run(debug=True)

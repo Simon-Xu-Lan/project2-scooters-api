@@ -6,6 +6,13 @@ class Polygons:
     def __init__(self):
         with open(FILE_PATH) as f:
             self.polygons = json.load(f)["features"]
+        self.polygon_DC = [
+            [39, -77.13],
+            [39, -76.9],
+            [38.79, -76.9],
+            [38.79, -77.13],
+        ]
+
 
     def inside(self, point, vs):
         """
@@ -44,3 +51,6 @@ class Polygons:
                 break
 
         return track_id
+
+    def is_inside_DC(self, point):
+        return self.inside(point, self.polygon_DC)
