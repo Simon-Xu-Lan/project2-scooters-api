@@ -79,5 +79,21 @@ def get_summary():
 
     return list(data)
 
+def get_trip_summary():
+    with pymongo.MongoClient(atlas_conn) as client:
+        db = client.scooters_DB
+        collection = db.trip_sums
+        data = collection.find({}, {'_id': False})
+
+    return list(data)
+
+def get_trip_hours():
+    with pymongo.MongoClient(atlas_conn) as client:
+        db = client.scooters_DB
+        collection = db.trip_hours
+        data = collection.find({}, {'_id': False})
+
+    return list(data)
+
 
     

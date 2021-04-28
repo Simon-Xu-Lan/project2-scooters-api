@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify
 from flask_cors import CORS
 
 from retrieve_data import get_all, get_by_name, get_latest, get_last_hours
-from retrieve_trips import get_all_trips, get_recent_trips_by_hours, get_trips_by_company, get_summary
+from retrieve_trips import get_all_trips, get_recent_trips_by_hours, get_trips_by_company, get_summary, get_trip_summary, get_trip_hours
 
 
 app = Flask(__name__)
@@ -44,6 +44,15 @@ def get_company_trips(name, number):
 @app.route("/api/trips/summary")
 def get_sums():
     return jsonify(data=get_summary())
+
+@app.route("/api/trips/trip-summary")
+def get_trip_sums():
+    return jsonify(data=get_trip_summary())
+
+@app.route("/api/trips/trip-hours")
+def get_trip_by_hours():
+    return jsonify(data=get_trip_hours())
+
 
 if __name__ == '__main__':
     app.run(debug=True)
