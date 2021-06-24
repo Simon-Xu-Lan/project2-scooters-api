@@ -1,8 +1,8 @@
 # DC Scooters Data Analytics
 ## Introduction
 ### Backend
-- This project retrieve scooter opertion data from the open API of 3 companies (Spin, Razor, Helbiz) and dump the raw data into MongoDB every minute. The data include scooter id, latitude, longtitude, timestamp. 
-- The app read data from MongoDB every hour. Then clean data, such as remove duplicates, and save the clean data into PostgreSQL.
+- This project retrieves scooter opertion data from the open API of 3 companies (Spin, Razor, Helbiz) and dump the raw data into MongoDB every minute. The data include scooter id, latitude, longitude, timestamp. 
+- The app reads data from MongoDB every hour. Then clean data, such as remove duplicates, and save the clean data into PostgreSQL.
 - Provide scooter data API based on clean data in PostgreSQL
 - Find the real scooter trips based on the clean data in PostgreSQL. Save the trip data to MongoDB
 - Provide scooter trips API based on the trip data in MongoDB.
